@@ -13,7 +13,7 @@ class Pokemon{
     favoris
 }
 
-// apparition de l'image dans "apparition"
+// apparition de l'image dans "apparition" et du nom du pokemon
 
 function chargerImage() {
   try {
