@@ -1,7 +1,6 @@
-termesRecherche = monChampSearch.value;
-const search = document.querySelector('#barreDeRecherche');
+const searchInput = document.querySelector('#site-search');
 const result = document.querySelector('#site-search')
-
+const pokemonSection = document.querySelector("#sectionPokemons")
 
 class Pokemon{
     id
@@ -13,22 +12,46 @@ class Pokemon{
     favoris
 }
 
-// apparition de l'image dans "apparition" et du nom du pokemon
+// https://pokeapi.co/api/v2/pokemon?limit=151
 
-function chargerImage() {
-  try {
-    const reponse = fetch("end point de l'API");  //en attente du lien
-    const data =  reponse.json();  // 
+getJSON()
 
-    const img = document.getElementById("api-pokemon-image");
-    const nom = document.getElementById("api-pokemon-name");
-    img.src = data.imageUrl; // si ne renvoie poas de binaire, sinon faut changer xD
-    // viens du mdn donc ptet pas adapter
-    nom.textContent = data.nom; //same que MDN, checker si c'est ok (lol)
+searchInput.addEventListener("input", ()=>{
+    getJSON(searchInput.value)
+})
 
-  } catch (erreur) {
-    console.error("Erreur lors du chargement de l'image :-(", erreur);
-  }
+async function getJSON(inputSearch = "") {
+    let api = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+        .then((response)=>response.json())
+        .then((responseJson)=>{return responseJson});
+    
+    let newApi = api.results.filter((item) => item.name.includes(inputSearch))
+    showImages(newApi)
 }
 
-chargerImage();
+async function showImages(api){
+    pokemonSection.innerHTML = ""
+    api.forEach(element => {
+        fetch(element.url)
+            .then(r => r.json())
+            .then(d =>
+                showImage(element.name, d.sprites.front_default)
+            )
+            .catch(error => console.error("Error:", error))
+    });
+}
+
+function showImage(name, image) {
+    let img = document.createElement("img")
+    let title = document.createElement("h1")
+    let div = document.createElement("div")
+
+    img.src = image;
+    title.innerHTML = name;
+
+    div.style.margin = "10px"
+    div.appendChild(img)
+    div.appendChild(title)
+
+    pokemonSection.appendChild(div)
+}
