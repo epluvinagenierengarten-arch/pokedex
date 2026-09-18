@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=M+PLUS+Code+Latin:wght@100..700&display=swap');
 
+*{
+    font-family:'Jura';
+}
+
 :root {
     --body-bg: antiquewhite;
     --header-bg: #f3dec3;
