@@ -42,6 +42,11 @@ body {
     display: none !important;
 }
 
+.closed {
+    opacity: 0%;
+    pointer-events: none;
+}
+
 /*page d'acceuil*/
 #indexMain {
     display: flex;
@@ -173,7 +178,7 @@ body {
     top: 30px;
 
     gap: 10px;
-    margin: 20px;
+    margin-top: 20px;
     width: fit-content;
 
     background-color: #FFFFFF50;
@@ -190,7 +195,6 @@ body {
 
 #site-search {
     min-width: 200px;
-    margin: 5px;
 
     font-family: "M Plus Code Latin";
     font-size: 15px;
@@ -205,6 +209,54 @@ body {
 
 #site-search::placeholder {
     color: #FFFFFF90;
+}
+
+#dropDownFilter {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    filter: drop-shadow(2px 2px 4px #00000080);
+
+    transition: transform .1s ease-out, filter .1s ease-out;
+
+    img {
+        height: 20px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-3px);
+        filter: drop-shadow(4px 4px 8px #00000030);
+    }
+}
+
+#filterModal {
+    position: absolute;
+    top: 145px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 10px 0;
+    width: 400px;
+    gap: 5px;
+
+    background-color: #b08ce250;
+    backdrop-filter: blur(3px);
+    border: 1px #b798d5 solid;
+    border-radius: 10px;
+
+    transition: opacity .3s ease-out;
+}
+
+.filterSelection {
+    height: 20px;
+    transition: transform .1s;
+    
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-3px) rotate(5deg);
+    }
 }
 
 /*bandeau*/
@@ -257,7 +309,6 @@ header {
 .toggle_button{
     margin: 20px;
 }
-
 
 .theme-toggle {
     width: 50px;
