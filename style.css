@@ -81,24 +81,52 @@ body {
 }
 
 
-/*page Home*/
+/*page pokedex*/
+#pokedexMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 100vh;
+
+    background-color: #181235;
+    background-image: radial-gradient(circle, #564b6a 1.2px, transparent 1.2px);
+    background-size: 15px 15px;
+}
+
+/*search bar*/
 #barreDeRecherche {
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 10px;
-    margin: 30px auto;
+    margin: 20px;
+    width: fit-content;
+
+    background-color: #FFFFFF50;
+    backdrop-filter: blur(1px);
+    border: 1px #ffffff80 solid;
+    border-radius: 100vh;
+}
+
+#searchIcon {
+    height: 20px;
+    margin: 10px;
+    fill: #FFFFFF80;
 }
 
 #site-search {
-    width: 400px;
-    padding: 10px;
-    font-size: 20px;
+    min-width: 200px;
+    font-size: 15px;
+    border: 0;
+    margin: 5px;
+    color: #fff;
+    background-color: transparent;
 }
 
-#barreDeRecherche button {
-    padding: 10px 20px;
-    font-size: 16px;
+#site-search::placeholder {
+    color: #FFFFFF90;
 }
 
 /*bandeau*/
