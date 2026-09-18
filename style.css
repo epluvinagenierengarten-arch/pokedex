@@ -122,9 +122,11 @@ body {
 
 #site-search {
     min-width: 200px;
+    margin: 5px;
+
+    font-family: "M Plus Code Latin";
     font-size: 15px;
     border: 0;
-    margin: 5px;
     color: #fff;
     background-color: transparent;
 }
