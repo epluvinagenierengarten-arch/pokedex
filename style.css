@@ -75,7 +75,7 @@ body {
     bottom: 0;
     width: auto;
     height: 350Px;
-    animation: entreesolgaleo 2s ease-out forwards;
+    animation: entreesolgaleo 2s ease-in-out forwards;
     user-select: none;
 }
 
@@ -85,7 +85,7 @@ body {
     bottom: 0;
     width: auto;
     height: 400px;
-    animation: entreelunala 2s ease-out forwards;
+    animation: entreelunala 2s ease-in-out forwards;
     user-select: none;
 }
 
@@ -315,4 +315,15 @@ header {
 
 [data-theme="dark"] .theme-toggle .icon {
     transform: translateX(22px);
+}
+
+/*footer*/
+
+footer {
+    height: 40px;
+    color: var(--title-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid var(--header-border);
 }
