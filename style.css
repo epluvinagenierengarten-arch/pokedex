@@ -190,6 +190,14 @@ body {
     }
 }
 
+.pokemon-card :hover{
+    cursor: pointer;
+}
+
+.dialogue{
+    cursor: pointer;
+}
+
 /*search bar*/
 #barreDeRecherche {
     display: flex;
