@@ -408,10 +408,15 @@ header {
 /*footer*/
 
 footer {
-    height: 40px;
-    color: var(--title-color);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 60px;
+
+    text-align: center;
+
+    background-color: #312d46;
+    color: #fff;
     border-top: 2px solid var(--header-border);
 }
