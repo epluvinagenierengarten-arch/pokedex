@@ -84,6 +84,20 @@ body {
     transform: translateY(0);
 }
 
+.pokemons{
+    display: flex;
+}
+
+.solgaleo{
+    width: 50%;
+    height: 50%;
+}
+
+.lunala{
+    width: 50%;
+    height: 50%;
+}
+
 
 /*page pokedex*/
 #pokedexMain {
