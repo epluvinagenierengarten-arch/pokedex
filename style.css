@@ -190,11 +190,12 @@ body {
     }
 }
 
-.pokemon-card :hover{
+.pokemon-card:hover{
     cursor: pointer;
 }
 
-.dialogue{
+
+#fermer{
     cursor: pointer;
 }
 
