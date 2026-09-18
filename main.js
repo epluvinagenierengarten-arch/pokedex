@@ -33,13 +33,12 @@ function chargerImage() {
 chargerImage();
 
 
-//code toggle
-
+// ------ DARKMODE ------
 const toggle = document.getElementById('theme-toggle');
 const icon = toggle.querySelector('.icon');
 
 const savedTheme = localStorage.getItem('theme')
-    || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
 applyTheme(savedTheme);
 
