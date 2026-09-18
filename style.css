@@ -1,3 +1,25 @@
 *{
     background-color: antiquewhite;
 }
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #f3dec3;
+    border-bottom: 2px solid color #c0b19e;
+}
+
+.bandeau {
+    margin: 0 auto;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#barreDeRecherche{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
