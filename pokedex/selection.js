@@ -1,6 +1,8 @@
 const searchInput = document.querySelector('#site-search')
 const result = document.querySelector('#site-search')
 
+const pokeModal = document.querySelector("#pokeModal")
+
 const pokemonSection = document.querySelector("#sectionPokemons")
 const endMessage =  document.querySelector("#sectionStartMessage")
 const dittoMessage = document.querySelector("#searchErrorMessage")
@@ -53,7 +55,7 @@ async function showImages(api, inputType){
             .then(d => {
                 if (d.types.some((item) => item.type.name == inputType) || inputType == "") {
                     dittoMessage.classList.add("hidden")
-                    showImage(element.name, d.sprites.front_default)
+                    showCard(d)
                 }
             }
             )
@@ -61,17 +63,20 @@ async function showImages(api, inputType){
     });
 }
 
-function showImage(name, image) {
+function showCard(data) {
     let img = document.createElement("img")
     let title = document.createElement("h1")
     let div = document.createElement("div")
 
-    img.src = image;
-    title.innerHTML = name;
+    img.src = data.sprites.front_default;
+    title.innerHTML = data.name;
 
     div.classList.add("pokemon-card")
     div.appendChild(img)
     div.appendChild(title)
+
+    // Au clic sur la carte -> ouvre le détail
+    div.addEventListener("click", () => openDetails(data))
 
     pokemonSection.appendChild(div)
 }
@@ -98,5 +103,33 @@ window.addEventListener('click', event=>{
     console.log(event.target, filterModal.contains(event.target))
     if (!filterModal.contains(event.target) && !dropDownFilter.contains(event.target)) {
         filterModal.classList.add("closed")
+    }
+})
+
+function openDetails(data) {
+    const types = data.types.map(t => t.type.name).join(", ");
+    const stats = data.stats
+        .map(s => `<li>${s.stat.name} : ${s.base_stat}</li>`)
+        .join("");
+
+    pokeModal.innerHTML = `
+        <div id="pokeId">
+            <img src="${data.sprites.front_default}" alt="${data.name}">
+            <h2>${data.name}</h2>
+        <div/>
+        <div id="pokeInfos">
+            <p><strong>Height :</strong> ${data.height / 10} m</p>
+            <p><strong>Weight :</strong> ${data.weight / 10} kg</p>
+            <p><strong>Type(s) :</strong> ${types}</p>
+        <div/>
+        <ul class="stats-list">${stats}</ul>
+    `;
+
+    pokeModal.classList.remove("hidden")
+}
+
+window.addEventListener("click", e=>{ // Fermer le modal quand on clique autre part que sur le modal ou un pokemon
+    if (!pokeModal.contains(e.target) && !(e.target.classList.contains("pokemon-card") || e.target.parentNode.classList.contains("pokemon-card"))) {
+        pokeModal.classList.add("hidden")
     }
 })
