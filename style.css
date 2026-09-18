@@ -3,6 +3,8 @@ body {
     background-color: antiquewhite;
 }
 
+/*bandeau*/
+
 header {
     position: sticky;
     top: 0;
@@ -29,3 +31,26 @@ header {
     font-size: 16px;
     padding:8px 4px;
 }
+
+/*barre de recherche*/
+
+#barreDeRecherche {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px auto;
+}
+
+#site-search {
+    width: 400px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#barreDeRecherche button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+
