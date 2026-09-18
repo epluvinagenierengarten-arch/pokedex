@@ -38,7 +38,67 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/*animations pokemons home page*/
+
+@keyframes entreesolgaleo {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entreelunala {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.pokemons{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+}
+
+.solgaleo{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    height: 350Px;
+    animation: entreesolgaleo 2s ease-out forwards;
+}
+
+.lunala{
+    position: absolute;
+    right: 60px;
+    bottom: 0;
+    width: auto;
+    height: 400px;
+    animation: entreelunala 2s ease-out forwards;
+}
+
+.solgaleo img,
+.lunala img{
+    height: auto;
+}
+
+
 /*page d'acceuil*/
+
+.mainpiece{
+    top: 50px;
+}
+
 #indexMain {
     display: flex;
     flex-direction: column;
@@ -49,6 +109,8 @@ body {
     background-color: var(--main-bg);
     opacity: 0.8;
     background: repeating-linear-gradient(45deg, var(--main-pattern-1) 0px, var(--main-pattern-1) 10px, var(--main-pattern-2) 10px, var(--main-pattern-2) 11px, var(--main-pattern-1) 11px, var(--main-pattern-1) 20px, var(--main-pattern-3) 20px, var(--main-pattern-3) 21px);
+    position: relative;
+    overflow: hidden;
 }
 
 .title h1 {
@@ -84,19 +146,6 @@ body {
     transform: translateY(0);
 }
 
-.pokemons{
-    display: flex;
-}
-
-.solgaleo{
-    width: 50%;
-    height: 50%;
-}
-
-.lunala{
-    width: 50%;
-    height: 50%;
-}
 
 
 /*page pokedex*/
