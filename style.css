@@ -136,23 +136,32 @@ body {
 }
 
 /*bandeau*/
-
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     position: sticky;
+
     top: 0;
     z-index: 100;
-    background-color: var(--header-bg);
+    background: linear-gradient(0.25turn, #846339 0%, #796040 13%, #B89F7E 84%, #DDB878 100%);
     border-bottom: 2px solid var(--header-border);
     height: auto;
 }
 
+#pokedexIcon {
+    height: 50px;
+    fill: #F6CE85;
+    margin-left: 10px;
+}
+
 .bandeau {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 16px 40px;
     display: flex;
+
+    min-width: 90%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 
@@ -168,6 +177,7 @@ header {
     font-family: "Jura";
     font-size: 20px;
     font-weight: 100;
+    color: #fff;
 }
 
 /*Test variable*/
