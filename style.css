@@ -1,3 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=M+PLUS+Code+Latin:wght@100..700&display=swap');
+
 *{
-    background-color: antiquewhite;
+    font-family:'Jura';
+}
+
+:root {
+    --body-bg: antiquewhite;
+    --header-bg: #f3dec3;
+    --header-border: #d0c4b4;
+    --link-color: #333;
+    --main-bg: #f0eee6;
+    --main-pattern-1: #f0eee6;
+    --main-pattern-2: #dddca6;
+    --main-pattern-3: #ed7b66;
+    --title-color: #281a60;
+    --button-bg: #281a60;
+    --button-text: #f0eee6;
+}
+
+[data-theme="dark"] {
+    --body-bg: #1b1332;
+    --header-bg: #2a1f4d;
+    --header-border: #4a3a70;
+    --link-color: #e8e0f5;
+    --main-bg: #1b1332;
+    --main-pattern-1: #1b1332;
+    --main-pattern-2: #5a4587;
+    --main-pattern-3: #a086c4;
+    --title-color: #e8e0f5;
+    --button-bg: #a086c4;
+    --button-text: #1b1332;
+}
+
+body {
+    margin: 0;
+    background-color: var(--body-bg);
+    transition: background-color 0.3s ease;
+}
+
+/*page d'acceuil*/
+#indexMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: calc(100vh - 70px);
+    background-color: var(--main-bg);
+    opacity: 0.8;
+    background: repeating-linear-gradient(45deg, var(--main-pattern-1) 0px, var(--main-pattern-1) 10px, var(--main-pattern-2) 10px, var(--main-pattern-2) 11px, var(--main-pattern-1) 11px, var(--main-pattern-1) 20px, var(--main-pattern-3) 20px, var(--main-pattern-3) 21px);
+}
+
+.title h1 {
+    font-size: 50px;
+    color: var(--title-color);
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px color #281a60;
+    margin-bottom: 40px;
+    
+}
+
+#startingButton {
+    text-decoration: none;
+    padding: 16px 48px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+#startingButton:hover {
+    background-color: var(--button-bg);
+    transform: translateY(-5px);
+}
+
+#startingButton:active {
+    transform: translateY(0);
+}
+
+
+/*page pokedex*/
+#pokedexMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 100vh;
+
+    background-color: #181235;
+    background-image: radial-gradient(circle, #564b6a 1.2px, transparent 1.2px);
+    background-size: 15px 15px;
+}
+
+/*search bar*/
+#barreDeRecherche {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+    margin: 20px;
+    width: fit-content;
+
+    background-color: #FFFFFF50;
+    backdrop-filter: blur(1px);
+    border: 1px #ffffff80 solid;
+    border-radius: 100vh;
+}
+
+#searchIcon {
+    height: 20px;
+    margin: 10px;
+    fill: #FFFFFF80;
+}
+
+#site-search {
+    min-width: 200px;
+    margin: 5px;
+
+    font-family: "M Plus Code Latin";
+    font-size: 15px;
+    border: 0;
+    color: #fff;
+    background-color: transparent;
+}
+
+#site-search::placeholder {
+    color: #FFFFFF90;
+}
+
+/*bandeau*/
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(0.25turn, #846339 0%, #796040 13%, #B89F7E 84%, #DDB878 100%);
+    border-bottom: 2px solid var(--header-border);
+    height: auto;
+}
+
+#pokedexIcon {
+    height: 50px;
+    fill: #F6CE85;
+    margin-left: 10px;
+}
+
+.bandeau {
+    display: flex;
+
+    min-width: 90%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.bandeau a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: 400;
+    font-size: 16px;
+    padding:8px 4px;
+}
+
+.nav-title {
+    font-family: "Jura";
+    font-size: 20px;
+    font-weight: 100;
+    color: #fff;
+}
+
+/*Test variable*/
+
+.toggle_button{
+    margin: 20px;
+}
+
+
+.theme-toggle {
+    width: 50px;
+    height: 28px;
+    border-radius: 1000px;
+    border: none;
+    background: #333;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background:#d7d2ca;
+}
+
+.theme-toggle .icon {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle .icon {
+    transform: translateX(22px);
 }
