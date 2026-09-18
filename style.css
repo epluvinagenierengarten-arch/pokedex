@@ -29,70 +29,13 @@
 }
 
 body {
-     margin: 0;
+    margin: 0;
     background-color: var(--body-bg);
     transition: background-color 0.3s ease;
 }
 
-/*bandeau*/
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--header-bg);
-    border-bottom: 2px solid var(--header-border);
-    height: auto;
-}
-
-.bandeau {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 16px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-.bandeau a {
-    text-decoration: none;
-    color: var(--link-color);
-    font-weight: 400;
-    font-size: 16px;
-    padding:8px 4px;
-}
-
-.nav-title {
-    font-family: "Jura";
-    font-size: 20px;
-    font-weight: 100;
-}
-
-/*barre de recherche*/
-
-#barreDeRecherche {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 30px auto;
-}
-
-#site-search {
-    width: 400px;
-    padding: 10px;
-    font-size: 20px;
-}
-
-#barreDeRecherche button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-
-/*page home*/
-Main {
+/*page d'acceuil*/
+#indexMain {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,6 +79,61 @@ Main {
     transform: translateY(0);
 }
 
+
+/*page Home*/
+#barreDeRecherche {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px auto;
+}
+
+#site-search {
+    width: 400px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#barreDeRecherche button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+/*bandeau*/
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--header-bg);
+    border-bottom: 2px solid var(--header-border);
+    height: auto;
+}
+
+.bandeau {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.bandeau a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: 400;
+    font-size: 16px;
+    padding:8px 4px;
+}
+
+.nav-title {
+    font-family: "Jura";
+    font-size: 20px;
+    font-weight: 100;
+}
 
 /*Test variable*/
 .theme-toggle {
