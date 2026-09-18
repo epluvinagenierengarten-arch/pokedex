@@ -95,10 +95,6 @@ body {
 
 /*page d'acceuil*/
 
-.mainpiece{
-    top: 50px;
-}
-
 #indexMain {
     display: flex;
     flex-direction: column;
