@@ -94,8 +94,39 @@ body {
     min-height: 100vh;
 
     background-color: #181235;
-    background-image: radial-gradient(circle, #564b6a 1.2px, transparent 1.2px);
+    background-image: radial-gradient(circle, #564b6a .5px, transparent .5px);
     background-size: 15px 15px;
+
+}
+
+#sectionPokemons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+.pokemon-card { /* Les carrés dans lesquels sont affichés les pokemons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 150px;
+    width: 130px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px #fff solid;
+    border-radius: 20px;
+    background-color: #a17eb840;
+
+    h1 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 100;
+    }
 }
 
 /*search bar*/
@@ -103,6 +134,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: sticky;
+    top: 30px;
 
     gap: 10px;
     margin: 20px;
