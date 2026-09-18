@@ -76,6 +76,7 @@ body {
     width: auto;
     height: 350Px;
     animation: entreesolgaleo 2s ease-out forwards;
+    user-select: none;
 }
 
 .lunala{
@@ -85,6 +86,7 @@ body {
     width: auto;
     height: 400px;
     animation: entreelunala 2s ease-out forwards;
+    user-select: none;
 }
 
 .solgaleo img,
