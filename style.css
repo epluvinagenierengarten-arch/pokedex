@@ -38,6 +38,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /*animations pokemons home page*/
 
 @keyframes entreesolgaleo {
@@ -179,6 +183,7 @@ body {
     width: 130px;
     margin: 10px;
     padding: 10px;
+
     border: 1px #fff solid;
     border-radius: 20px;
     background-color: #a17eb840;
@@ -194,8 +199,45 @@ body {
     cursor: pointer;
 }
 
+#pokeModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 
-#fermer{
+    z-index: 100;
+    width: auto;
+    padding: 10px;
+
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+
+    color: #fff;
+    background-color: #382848a0;
+    backdrop-filter: blur(4px);
+    border: 1px #fff solid;
+    border-radius: 15px;
+}
+
+#pokeId {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#pokeId img {
+    height: 150px;
+}
+
+#pokeInfos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#fermer:hover{
     cursor: pointer;
 }
 

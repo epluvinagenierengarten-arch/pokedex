@@ -1,6 +1,7 @@
 const searchInput = document.querySelector('#site-search');
 const pokemonSection = document.querySelector("#sectionPokemons");
-const dialogue = document.querySelector("#dialogue");
+
+const pokeModal = document.querySelector("#pokeModal")
 
 class Pokemon{
     id
@@ -19,13 +20,6 @@ getJSON()
 searchInput.addEventListener("input", ()=>{
     getJSON(searchInput.value)
 })
-
-// Ferme le dialogue au clic sur le bouton (délégation car le bouton est recréé)
-dialogue.addEventListener("click", (e) => {
-    if (e.target.id === "fermer") {
-        dialogue.close();
-    }
-});
 
 async function getJSON(inputSearch = "") {
     let api = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
@@ -72,17 +66,24 @@ function openDetails(data) {
         .map(s => `<li>${s.stat.name} : ${s.base_stat}</li>`)
         .join("");
 
-    dialogue.innerHTML = `
-        <button type="button" id="fermer">Fermer la boîte de dialogue</button>
-        <div class="dialog-content">
+    pokeModal.innerHTML = `
+        <div id="pokeId">
             <img src="${data.sprites.front_default}" alt="${data.name}">
             <h2>${data.name}</h2>
-            <p><strong>Taille :</strong> ${data.height / 10} m</p>
-            <p><strong>Poids :</strong> ${data.weight / 10} kg</p>
+        <div/>
+        <div id="pokeInfos">
+            <p><strong>Height :</strong> ${data.height / 10} m</p>
+            <p><strong>Weight :</strong> ${data.weight / 10} kg</p>
             <p><strong>Type(s) :</strong> ${types}</p>
-            <ul class="stats-list">${stats}</ul>
-        </div>
+        <div/>
+        <ul class="stats-list">${stats}</ul>
     `;
 
-    dialogue.showModal();
+    pokeModal.classList.remove("hidden")
 }
+
+window.addEventListener("click", e=>{ // Fermer le modal quand on clique autre part que sur le modal ou un pokemon
+    if (!pokeModal.contains(e.target) && !(e.target.classList.contains("pokemon-card") || e.target.parentNode.classList.contains("pokemon-card"))) {
+        pokeModal.classList.add("hidden")
+    }
+})
