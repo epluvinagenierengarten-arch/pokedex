@@ -1,6 +1,8 @@
 const searchInput = document.querySelector('#site-search');
 const result = document.querySelector('#site-search')
 const pokemonSection = document.querySelector("#sectionPokemons")
+const endMessage =  document.querySelector("#sectionStartMessage")
+const dittoMessage = document.querySelector("#searchErrorMessage")
 
 class Pokemon{
     id
@@ -14,10 +16,15 @@ class Pokemon{
 
 // https://pokeapi.co/api/v2/pokemon?limit=151
 
-getJSON()
-
 searchInput.addEventListener("input", ()=>{
-    getJSON(searchInput.value)
+    dittoMessage.classList.add("hidden")
+    if (searchInput.value != "") {
+        getJSON(searchInput.value)
+        endMessage.classList.add("hidden")
+    } else {
+        pokemonSection.innerHTML = ""
+        endMessage.classList.remove("hidden")
+    }
 })
 
 async function getJSON(inputSearch = "") {
@@ -25,8 +32,8 @@ async function getJSON(inputSearch = "") {
         .then((response)=>response.json())
         .then((responseJson)=>{return responseJson});
 
-    let newApi = api.results.filter((item) => item.name.includes(inputSearch))
-            showImages(newApi)
+    let newApi = api.results.filter((item) => item.name.includes(inputSearch.toLowerCase()))
+    showImages(newApi)
 }
 
 async function showImages(api){
@@ -39,6 +46,9 @@ async function showImages(api){
             )
             .catch(error => console.error("Error:", error))
     });
+    if (api.length <= 0) {
+        dittoMessage.classList.remove("hidden")
+    }
 }
 
 function showImage(name, image) {

@@ -38,6 +38,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /*page d'acceuil*/
 #indexMain {
     display: flex;
@@ -108,6 +112,36 @@ body {
     gap: 5px;
 }
 
+#sectionStartMessage { /* Message affiché avant la rechercher */
+    width: 200px;
+
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(#4E3D81, #372861);
+    color: #fff;
+    border: 1px #61517f solid;
+    border-radius: 20px;
+}
+
+#searchErrorMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+
+    h2 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 100;
+    }
+
+    img {
+        height: 150px;
+    }
+}
+
 .pokemon-card { /* Les carrés dans lesquels sont affichés les pokemons */
     display: flex;
     align-items: center;
@@ -163,6 +197,10 @@ body {
     border: 0;
     color: #fff;
     background-color: transparent;
+}
+
+#site-search:focus {
+	outline: none;
 }
 
 #site-search::placeholder {
