@@ -54,3 +54,47 @@ header {
 }
 
 
+/*page home*/
+Main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: calc(100vh - 70px);
+    background-color: #f0eee6;
+    opacity: 0.8;
+    background: repeating-linear-gradient(45deg, #f0eee6 0px, #f0eee6 10px, #dddca6 10px, #dddca6 11px, #f0eee6 11px, #f0eee6 20px, #ed7b66 20px, #ed7b66 21px);
+}
+
+.title h1 {
+    font-size: 50px;
+    color: #281a60;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px color #281a60;
+    margin-bottom: 40px;
+    
+}
+
+#startingButton {
+    padding: 16px 48px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #f0eee6;
+    background-color: #281a60;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+#startingButton:hover {
+    background-color: #281a60;
+    transform: translateY(-5px);
+}
+
+#startingButton:active {
+    transform: translateY(0);
+}
