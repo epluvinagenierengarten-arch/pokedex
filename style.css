@@ -58,6 +58,7 @@ body {
 }
 
 #startingButton {
+    text-decoration: none;
     padding: 16px 48px;
     font-size: 20px;
     font-weight: 600;
@@ -136,10 +137,16 @@ header {
 }
 
 /*Test variable*/
+
+.toggle_button{
+    margin: 20px;
+}
+
+
 .theme-toggle {
     width: 50px;
     height: 28px;
-    border-radius: 999px;
+    border-radius: 1000px;
     border: none;
     background: #333;
     cursor: pointer;
@@ -149,7 +156,7 @@ header {
 }
 
 [data-theme="dark"] .theme-toggle {
-    background: #8c5ecc;
+    background:#d7d2ca;
 }
 
 .theme-toggle .icon {
