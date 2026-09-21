@@ -166,7 +166,6 @@ body {
     background-color: #181235;
     background-image: radial-gradient(circle, #564b6a .5px, transparent .5px);
     background-size: 15px 15px;
-
 }
 
 #sectionPokemons {
@@ -230,13 +229,18 @@ body {
 }
 
 /*search bar*/
+#searchInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 60px;
+}
+
 #barreDeRecherche {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    position: sticky;
-    top: 30px;
 
     gap: 10px;
     margin-top: 20px;
@@ -363,6 +367,13 @@ header {
     font-size: 20px;
     font-weight: 100;
     color: #fff;
+
+    transition: transform .1s ease-out;
+}
+
+.nav-title:hover {
+    cursor: pointer;
+    transform: scaleX(1.1);
 }
 
 /*Test variable*/

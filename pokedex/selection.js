@@ -1,5 +1,5 @@
+const searchBar = document.querySelector("#barreDeRecherche")
 const searchInput = document.querySelector('#site-search')
-const result = document.querySelector('#site-search')
 
 const pokemonSection = document.querySelector("#sectionPokemons")
 const endMessage =  document.querySelector("#sectionStartMessage")
@@ -9,7 +9,15 @@ const dropDownFilter = document.querySelector("#dropDownFilter")
 const filterSelections = document.querySelectorAll(".filterSelection")
 const filterModal = document.querySelector("#filterModal")
 
+const goToSearchButton = document.querySelector("#goToSearchButton")
+const goToListButton = document.querySelector("#goToListButton")
+const goToFavButton = document.querySelector("#goToFavButton")
+
 let currentType = "";
+let currentPage = "";
+if (localStorage.getItem("currentPage") != null) {
+    currentPage = localStorage.getItem("currentPage") // C'est un str on a pas besoin de le json
+}
 
 class Pokemon{
     id
@@ -42,7 +50,8 @@ async function getJSON(inputSearch = "", inputType = "") {
         .then((responseJson)=>{return responseJson});
 
     // On tri selon le nom entré
-    let newApi = api.results.filter((item) => item.name.includes(inputSearch.toLowerCase()))
+    let newApi = api.results
+    if (inputSearch != "*") newApi = api.results.filter((item) => item.name.includes(inputSearch.toLowerCase()))
     showImages(newApi, inputType)
 }
 
@@ -109,3 +118,43 @@ window.addEventListener('click', event=>{ // Fermer la fenetre si on clique pas 
         filterModal.classList.add("closed")
     }
 })
+
+// Gestion d'onglets
+goToSearchButton.addEventListener("click", e=>{
+    currentPage = "search"
+    localStorage.setItem("currentPage", "search") // C'est un str on a pas besoin de le json
+    updatePage()
+})
+
+goToListButton.addEventListener("click", e=>{
+    currentPage = "list"
+    localStorage.setItem("currentPage", "list") // C'est un str on a pas besoin de le json
+    updatePage()
+})
+
+goToFavButton.addEventListener("click", e=>{
+    currentPage = "fav"
+    localStorage.setItem("currentPage", "fav") // C'est un str on a pas besoin de le json
+    updatePage()
+})
+
+function updatePage() {
+    switch(currentPage) {
+        case "search" : {
+            searchBar.classList.remove("hidden")
+            dropDownFilter.classList.remove("hidden")
+            getJSON("")
+            return;
+        }
+        case "list" : {
+            searchBar.classList.add("hidden")
+            dropDownFilter.classList.add("hidden")
+            getJSON("*")
+            return;
+        }
+        case "fav" : {
+            return;
+        }
+        default : return;
+    }
+}
