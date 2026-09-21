@@ -19,6 +19,7 @@ let currentType = "";
 let currentPage = "";
 if (localStorage.getItem("currentPage") != null) {
     currentPage = localStorage.getItem("currentPage") // C'est un str on a pas besoin de le json
+    updatePage()
 }
 
 class Pokemon{
@@ -157,33 +158,18 @@ window.addEventListener("click", e=>{ // Fermer le modal quand on clique autre p
 
 // -- GESTION D'ONGLETS --
 goToSearchButton.addEventListener("click", e=>{
-    // On souligne le bon
-    goToSearchButton.style.textDecoration = "underline"
-    goToListButton.style.textDecoration = "none"
-    goToFavButton.style.textDecoration = "none"
-
     currentPage = "search"
     localStorage.setItem("currentPage", "search") // C'est un str on a pas besoin de le json
     updatePage()
 })
 
 goToListButton.addEventListener("click", e=>{
-    // On souligne le bon
-    goToSearchButton.style.textDecoration = "none"
-    goToListButton.style.textDecoration = "underline"
-    goToFavButton.style.textDecoration = "none"
-
     currentPage = "list"
     localStorage.setItem("currentPage", "list") // C'est un str on a pas besoin de le json
     updatePage()
 })
 
 goToFavButton.addEventListener("click", e=>{
-    // On souligne le bon
-    goToSearchButton.style.textDecoration = "none"
-    goToListButton.style.textDecoration = "none"
-    goToFavButton.style.textDecoration = "underline"
-
     currentPage = "fav"
     localStorage.setItem("currentPage", "fav") // C'est un str on a pas besoin de le json
     updatePage()
@@ -192,18 +178,33 @@ goToFavButton.addEventListener("click", e=>{
 function updatePage() {
     switch(currentPage) {
         case "search" : { // Remets la barre de recherche et setup de base
+            // On souligne le bon
+            goToSearchButton.style.textDecoration = "underline"
+            goToListButton.style.textDecoration = "none"
+            goToFavButton.style.textDecoration = "none"
+
             searchBar.classList.remove("hidden")
             dropDownFilter.classList.remove("hidden")
             getJSON()
             return;
         }
         case "list" : { // Retire la barre de recherche et affiche tout
+            // On souligne le bon
+            goToSearchButton.style.textDecoration = "none"
+            goToListButton.style.textDecoration = "underline"
+            goToFavButton.style.textDecoration = "none"
+
             searchBar.classList.add("hidden")
             dropDownFilter.classList.add("hidden")
             getJSON("*")
             return;
         }
         case "fav" : { // Remets la barre de recherche et setup les favs
+            // On souligne le bon
+            goToSearchButton.style.textDecoration = "none"
+            goToListButton.style.textDecoration = "none"
+            goToFavButton.style.textDecoration = "underline"
+
             searchBar.classList.remove("hidden")
             dropDownFilter.classList.remove("hidden")
             getFavs();
