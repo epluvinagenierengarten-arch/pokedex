@@ -32,7 +32,8 @@ class Pokemon{
 // https://pokeapi.co/api/v2/pokemon?limit=151
 
 searchInput.addEventListener("input", ()=>{ // Quand on recoit tape dans la barre de recherche
-    getJSON(searchInput.value, currentType)
+    if (currentPage == "fav") getFavs(searchInput.value, currentType)
+    else getJSON(searchInput.value, currentType)
 })
 
 // Fonction d'appel et d'affichage de l'API
@@ -103,10 +104,12 @@ filterSelections.forEach(selection => { // Selection des types
     selection.addEventListener("click", ()=>{
         dropDownFilter.children[0].src = selection.src; // On change l'image du bouton type
         if (selection.alt != "all") { // *all types
-            getJSON(searchInput.value, selection.alt)
+            if (currentPage == "fav") getFavs(searchInput.value, selection.alt)
+            else getJSON(searchInput.value, selection.alt)
             currentType = selection.alt;
         } else {
-            getJSON(searchInput.value, "")
+            if (currentPage == "fav") getFavs(searchInput)
+            else getJSON(searchInput.value)
             currentType = "";
         }
         filterModal.classList.add("closed") // On ferme le modal
@@ -121,18 +124,33 @@ window.addEventListener('click', event=>{ // Fermer la fenetre si on clique pas 
 
 // Gestion d'onglets
 goToSearchButton.addEventListener("click", e=>{
+    // On souligne le bon
+    goToSearchButton.style.textDecoration = "underline"
+    goToListButton.style.textDecoration = "none"
+    goToFavButton.style.textDecoration = "none"
+
     currentPage = "search"
     localStorage.setItem("currentPage", "search") // C'est un str on a pas besoin de le json
     updatePage()
 })
 
 goToListButton.addEventListener("click", e=>{
+    // On souligne le bon
+    goToSearchButton.style.textDecoration = "none"
+    goToListButton.style.textDecoration = "underline"
+    goToFavButton.style.textDecoration = "none"
+
     currentPage = "list"
     localStorage.setItem("currentPage", "list") // C'est un str on a pas besoin de le json
     updatePage()
 })
 
 goToFavButton.addEventListener("click", e=>{
+    // On souligne le bon
+    goToSearchButton.style.textDecoration = "none"
+    goToListButton.style.textDecoration = "none"
+    goToFavButton.style.textDecoration = "underline"
+
     currentPage = "fav"
     localStorage.setItem("currentPage", "fav") // C'est un str on a pas besoin de le json
     updatePage()
@@ -153,8 +171,16 @@ function updatePage() {
             return;
         }
         case "fav" : {
+            searchBar.classList.remove("hidden")
+            dropDownFilter.classList.remove("hidden")
+            getFavs();
             return;
         }
         default : return;
     }
+}
+
+// Favs
+function getFavs(inputSearch, inputType) {
+    // ET LA ON CHERCHE ET ON AFFICHE LES FAVS ICI
 }
