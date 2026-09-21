@@ -1,4 +1,4 @@
-const searchBarPart = document.querySelector("#searchInput")
+const searchBarPart = document.querySelector("#barreDeRecherche") // (dans ton HTML l'id est barreDeRecherche, pas searchInput)
 const searchInput = document.querySelector('#site-search')
 
 const pokeModal = document.querySelector("#pokeModal")
@@ -17,10 +17,7 @@ const goToFavButton = document.querySelector("#goToFavButton")
 
 let currentType = "";
 let currentPage = "";
-if (localStorage.getItem("currentPage") != null) {
-    currentPage = localStorage.getItem("currentPage") // C'est un str on a pas besoin de le json
-    updatePage()
-}
+let searchId = 0 
 
 class Pokemon{
     id
@@ -34,14 +31,17 @@ class Pokemon{
 
 // https://pokeapi.co/api/v2/pokemon?limit=151
 
-searchInput.addEventListener("input", ()=>{ // Quand on recoit tape dans la barre de recherche
+function refresh() {
     if (currentPage == "fav") getFavs(searchInput.value, currentType)
+    else if (currentPage == "list") getJSON("*", currentType)
     else getJSON(searchInput.value, currentType)
-})
+}
+
+searchInput.addEventListener("input", refresh)
 
 // Fonction d'appel et d'affichage de l'API
 async function getJSON(inputSearch = "", inputType = "") {
-    if (inputSearch == "" && inputType == "") { // Si la barre est vide
+    if (inputSearch == "" && inputType == "") { 
         pokemonSection.innerHTML = "" 
         endMessage.classList.remove("hidden")
         return;
@@ -60,22 +60,26 @@ async function getJSON(inputSearch = "", inputType = "") {
 }
 
 // Cette fonction va chercher les images dans les sous-liens de l'API
-async function showImages(api, inputType){
+async function showImages(api, inputType) {
+    const myId = ++searchId
     pokemonSection.innerHTML = ""
     dittoMessage.classList.remove("hidden")
 
-    api.forEach(element => { // Pour chaque pokemon dans la liste triée
-        fetch(element.url) // On va chercher l'API de son lien
-            .then(r => r.json())
-            .then(d => {
-                if (d.types.some((item) => item.type.name == inputType) || inputType == "") { // On garde que les Pokemons qui correspondent au type choisi (si y'a un type)
-                    dittoMessage.classList.add("hidden") // On retire le message d'erreur
-                    showCard(d) // On affiche l'image
-                }
-            }
-            )
-            .catch(error => console.error("Error:", error))
-    });
+    try {
+        const results = await Promise.all(
+            api.map(el => fetch(el.url).then(r => r.json()))
+        )
+        if (myId !== searchId) return
+
+        results
+            .filter(d => inputType == "" || d.types.some(t => t.type.name == inputType))
+            .forEach(d => {
+                dittoMessage.classList.add("hidden")
+                showCard(d)
+            })
+    } catch (error) {
+        console.error("Error:", error)
+    }
 }
 
 function showCard(data) {
@@ -83,22 +87,33 @@ function showCard(data) {
     // <div class="pokemon-card">
     //      <img src={image}/>
     //      <h1 src={name}/>
+    //      <button>♡</button>
     // </div>
     let img = document.createElement("img")
     let title = document.createElement("h1")
     let div = document.createElement("div")
+    let favButton = document.createElement("button") 
 
     img.src = data.sprites.front_default;
     title.innerHTML = data.name;
 
+    favButton.textContent = isFav(data.name) ? "★" : "☆"
+    favButton.classList.add("fav-button")
+
+    favButton.addEventListener("click", (event) => {
+        event.stopPropagation()
+        toggleFav(data.name) //etoile vide ou pas
+        favButton.textContent = isFav(data.name) ? "★" : "☆"
+
+        if (currentPage == "fav") refresh()
+    })
+
     div.classList.add("pokemon-card")
     div.appendChild(img)
     div.appendChild(title)
-
-    // Au clic sur la carte -> ouvre le détail
+    div.appendChild(favButton)
     div.addEventListener("click", () => openDetails(data))
 
-    // On balance cet élement dans la section Pokémon
     pokemonSection.appendChild(div)
 }
 
@@ -109,15 +124,8 @@ dropDownFilter.addEventListener("click", ()=>{ // Ouvrir menu types
 filterSelections.forEach(selection => { // Selection des types
     selection.addEventListener("click", ()=>{
         dropDownFilter.children[0].src = selection.src; // On change l'image du bouton type
-        if (selection.alt != "all") { // *all types
-            if (currentPage == "fav") getFavs(searchInput.value, selection.alt)
-            else getJSON(searchInput.value, selection.alt)
-            currentType = selection.alt;
-        } else {
-            if (currentPage == "fav") getFavs(searchInput)
-            else getJSON(searchInput.value)
-            currentType = "";
-        }
+        currentType = (selection.alt != "all") ? selection.alt : "" // *all types
+        refresh()
         filterModal.classList.add("closed") // On ferme le modal
     })
 });
@@ -138,12 +146,12 @@ function openDetails(data) {
         <div id="pokeId">
             <img src="${data.sprites.front_default}" alt="${data.name}">
             <h2>${data.name}</h2>
-        <div/>
+        </div>
         <div id="pokeInfos">
             <p><strong>Height :</strong> ${data.height / 10} m</p>
             <p><strong>Weight :</strong> ${data.weight / 10} kg</p>
             <p><strong>Type(s) :</strong> ${types}</p>
-        <div/>
+        </div>
         <ul class="stats-list">${stats}</ul>
     `;
 
@@ -157,25 +165,21 @@ window.addEventListener("click", e=>{ // Fermer le modal quand on clique autre p
 })
 
 // -- GESTION D'ONGLETS --
-goToSearchButton.addEventListener("click", e=>{
-    currentPage = "search"
-    localStorage.setItem("currentPage", "search") // C'est un str on a pas besoin de le json
+function changePage(page) {
+    currentPage = page
+    localStorage.setItem("currentPage", page) // C'est un str on a pas besoin de le json
     updatePage()
-})
+}
 
-goToListButton.addEventListener("click", e=>{
-    currentPage = "list"
-    localStorage.setItem("currentPage", "list") // C'est un str on a pas besoin de le json
-    updatePage()
-})
 
-goToFavButton.addEventListener("click", e=>{
-    currentPage = "fav"
-    localStorage.setItem("currentPage", "fav") // C'est un str on a pas besoin de le json
-    updatePage()
-})
+goToSearchButton.addEventListener("click", e=>{changePage("search") })
+goToListButton.addEventListener("click", e=>{changePage("list") })
+goToFavButton.addEventListener("click", e=>{changePage("fav") })
 
 function updatePage() {
+    currentType = "";
+    dropDownFilter.children[0].src = "../soucres/all_icon.png"
+
     switch(currentPage) {
         case "search" : { // Remets la barre de recherche et setup de base
             // On souligne le bon
@@ -194,7 +198,7 @@ function updatePage() {
             goToFavButton.classList.remove("selected")
 
             searchBarPart.classList.add("hidden")
-            getJSON("*")
+            getJSON("*", currentType)
             return;
         }
         case "fav" : { // Remets la barre de recherche et setup les favs
@@ -211,7 +215,41 @@ function updatePage() {
     }
 }
 
-// Favs
-function getFavs(inputSearch, inputType) {
-    // ET LA ON CHERCHE ET ON AFFICHE LES FAVS ICI
+//les favorisssssssss
+// On stocke uniquement les noms dans le localStorage ;)
+function loadFavs() {
+    return JSON.parse(localStorage.getItem("favs")) || []
+}
+
+function isFav(name) {
+    return loadFavs().includes(name)
+}
+
+function toggleFav(name){
+    let favs = loadFavs()
+    if (favs.includes(name)){
+        favs = favs.filter(n => n != name)
+    } else {
+        favs.push(name)
+    }
+
+    localStorage.setItem("favs", JSON.stringify(favs))
+}
+
+function getFavs(inputSearch = "", inputType = ""){
+    endMessage.classList.add("hidden")
+
+    const favs = loadFavs()
+        .filter(name => name.includes(inputSearch.toLowerCase()))
+        .map(name => ({ 
+            name: name,
+            url: `https://pokeapi.co/api/v2/pokemon/${name}`
+        }))
+
+    showImages(favs, inputType) // même affichage que pour la recherche yipee
+}
+
+if (localStorage.getItem("currentPage") != null) {
+    currentPage = localStorage.getItem("currentPage")
+    updatePage()
 }

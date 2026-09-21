@@ -491,3 +491,13 @@ footer {
     color: #fff;
     border-top: 2px solid var(--header-border);
 }
+
+/*bouton favoris*/
+
+.fav-button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+}
