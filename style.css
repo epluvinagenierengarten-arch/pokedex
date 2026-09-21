@@ -418,6 +418,10 @@ header {
     transition: transform .1s ease-out;
 }
 
+.nav-title.selected {
+    font-weight: 1000;
+}
+
 .nav-title:hover {
     cursor: pointer;
     transform: scaleX(1.1);

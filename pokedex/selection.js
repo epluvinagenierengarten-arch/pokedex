@@ -179,20 +179,20 @@ function updatePage() {
     switch(currentPage) {
         case "search" : { // Remets la barre de recherche et setup de base
             // On souligne le bon
-            goToSearchButton.style.textDecoration = "underline"
-            goToListButton.style.textDecoration = "none"
-            goToFavButton.style.textDecoration = "none"
+            goToSearchButton.classList.add("selected")
+            goToListButton.classList.remove("selected")
+            goToFavButton.classList.remove("selected")
 
             searchBar.classList.remove("hidden")
-            dropDownFilter.classList.remove("hidden")
-            getJSON()
+            dropDownFilter.remove("hidden")
+            getJSON("", currentType)
             return;
         }
         case "list" : { // Retire la barre de recherche et affiche tout
             // On souligne le bon
-            goToSearchButton.style.textDecoration = "none"
-            goToListButton.style.textDecoration = "underline"
-            goToFavButton.style.textDecoration = "none"
+            goToSearchButton.classList.remove("selected")
+            goToListButton.classList.add("selected")
+            goToFavButton.classList.remove("selected")
 
             searchBar.classList.add("hidden")
             dropDownFilter.classList.add("hidden")
@@ -201,13 +201,13 @@ function updatePage() {
         }
         case "fav" : { // Remets la barre de recherche et setup les favs
             // On souligne le bon
-            goToSearchButton.style.textDecoration = "none"
-            goToListButton.style.textDecoration = "none"
-            goToFavButton.style.textDecoration = "underline"
+            goToSearchButton.classList.remove("selected")
+            goToListButton.classList.remove("selected")
+            goToFavButton.classList.add("selected")
 
             searchBar.classList.remove("hidden")
             dropDownFilter.classList.remove("hidden")
-            getFavs();
+            getFavs("", currentType);
             return;
         }
         default : return;
