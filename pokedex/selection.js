@@ -1,4 +1,4 @@
-const searchBar = document.querySelector("#barreDeRecherche")
+const searchBarPart = document.querySelector("#searchInput")
 const searchInput = document.querySelector('#site-search')
 
 const pokeModal = document.querySelector("#pokeModal")
@@ -147,12 +147,12 @@ function openDetails(data) {
         <ul class="stats-list">${stats}</ul>
     `;
 
-    pokeModal.classList.remove("hidden")
+    pokeModal.classList.remove("closed")
 }
 
 window.addEventListener("click", e=>{ // Fermer le modal quand on clique autre part que sur le modal ou un pokemon
     if (!pokeModal.contains(e.target) && !(e.target.classList.contains("pokemon-card") || e.target.parentNode.classList.contains("pokemon-card"))) {
-        pokeModal.classList.add("hidden")
+        pokeModal.classList.add("closed")
     }
 })
 
@@ -183,8 +183,7 @@ function updatePage() {
             goToListButton.classList.remove("selected")
             goToFavButton.classList.remove("selected")
 
-            searchBar.classList.remove("hidden")
-            dropDownFilter.remove("hidden")
+            searchBarPart.classList.remove("hidden")
             getJSON("", currentType)
             return;
         }
@@ -194,8 +193,7 @@ function updatePage() {
             goToListButton.classList.add("selected")
             goToFavButton.classList.remove("selected")
 
-            searchBar.classList.add("hidden")
-            dropDownFilter.classList.add("hidden")
+            searchBarPart.classList.add("hidden")
             getJSON("*")
             return;
         }
@@ -205,8 +203,7 @@ function updatePage() {
             goToListButton.classList.remove("selected")
             goToFavButton.classList.add("selected")
 
-            searchBar.classList.remove("hidden")
-            dropDownFilter.classList.remove("hidden")
+            searchBarPart.classList.remove("hidden")
             getFavs("", currentType);
             return;
         }

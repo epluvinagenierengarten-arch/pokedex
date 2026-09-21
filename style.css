@@ -45,6 +45,7 @@ body {
 .closed {
     opacity: 0%;
     pointer-events: none;
+    transform: translateY(-10px);
 }
 
 /*animations pokemons home page*/
@@ -222,6 +223,8 @@ body {
     border-radius: 20px;
     background-color: #a17eb840;
 
+    transition: background-color .2s ease-in-out, transform .2s ease-in, box-shadow .2s ease-in-out;
+
     h1 {
         color: #fff;
         font-size: 20px;
@@ -231,6 +234,9 @@ body {
 
 .pokemon-card:hover{
     cursor: pointer;
+    background-color: #c99ead80;
+    box-shadow: 0 3px 10px #c99ead80;
+    transform: translateY(-5px);
 }
 
 #pokeModal {
@@ -252,6 +258,8 @@ body {
     backdrop-filter: blur(4px);
     border: 1px #fff solid;
     border-radius: 15px;
+
+    transition: opacity .3s, transform .3s;
 }
 
 #pokeId {
@@ -358,7 +366,7 @@ body {
     border: 1px #b798d5 solid;
     border-radius: 10px;
 
-    transition: opacity .3s ease-out;
+    transition: opacity .3s ease-out, transform .3s;
 }
 
 .filterSelection {
