@@ -178,7 +178,7 @@ goToFavButton.addEventListener("click", e=>{changePage("fav") })
 
 function updatePage() {
     currentType = "";
-    dropDownFilter.children[0].src = "../soucres/all_icon.png"
+    dropDownFilter.children[0].src = "../soucres/git all_icon.png"
 
     switch(currentPage) {
         case "search" : { // Remets la barre de recherche et setup de base
