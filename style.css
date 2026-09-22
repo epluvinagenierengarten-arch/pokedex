@@ -7,15 +7,23 @@
 :root {
     --body-bg: antiquewhite;
     --header-bg: #f3dec3;
-    --header-border: #d0c4b4;
+    --header-border: #dd7b54;
     --link-color: #333;
     --main-bg: #f0eee6;
-    --main-pattern-1: #f0eee6;
+    --main-pattern-1: #fffcf7;
     --main-pattern-2: #dddca6;
-    --main-pattern-3: #ed7b66;
-    --title-color: #281a60;
+    --main-pattern-3: #c35f4b;
+    --nav-pattern-1: #dab551;
+    --nav-pattern-2: #e0b049;
+    --nav-pattern-3: #cf734f;
+    --nav-pattern-4: #ee5329;
+    --title-color: #4e466d;
     --button-bg: #281a60;
     --button-text: #f0eee6;
+    --searchbar-bg: #d6b8ac50;
+    --searchbar-text: #5e3717;
+    --filter-modal-bg: #e2a78c50;
+    --filter-modal-border: #ab6b43;
 }
 
 [data-theme="dark"] {
@@ -24,12 +32,20 @@
     --header-border: #4a3a70;
     --link-color: #e8e0f5;
     --main-bg: #1b1332;
-    --main-pattern-1: #1b1332;
-    --main-pattern-2: #5a4587;
+    --main-pattern-1: #181235;
+    --main-pattern-2: #564b6a;
     --main-pattern-3: #a086c4;
+    --nav-pattern-1: #846339;
+    --nav-pattern-2: #796040;
+    --nav-pattern-3: #B89F7E;
+    --nav-pattern-4: #DDB878;
     --title-color: #e8e0f5;
     --button-bg: #a086c4;
     --button-text: #1b1332;
+    --searchbar-bg: #FFFFFF50;
+    --searchbar-text: #ffffffcf;
+    --filter-modal-bg: #b08ce250;
+    --filter-modal-border: #b798d5;
 }
 
 body {
@@ -164,8 +180,8 @@ body {
 
     min-height: 100vh;
 
-    background-color: #181235;
-    background-image: radial-gradient(circle, #564b6a .5px, transparent .5px);
+    background-color: var(--main-pattern-1);
+    background-image: radial-gradient(circle, var(--main-pattern-3) .5px, transparent .5px);
     background-size: 15px 15px;
 }
 
@@ -183,8 +199,8 @@ body {
 
     text-align: center;
     padding: 0 20px;
-    background: radial-gradient(#4E3D81, #372861);
-    color: #fff;
+    background: radial-gradient(var(--main-pattern-2), var(--main-pattern-1));
+    color: var(--link-color);
     border: 1px #61517f solid;
     border-radius: 20px;
 }
@@ -219,14 +235,14 @@ body {
     margin: 10px;
     padding: 10px;
 
-    border: 1px #fff solid;
+    border: 1px var(--link-color) solid;
     border-radius: 20px;
     background-color: #a17eb840;
 
     transition: background-color .2s ease-in-out, transform .2s ease-in, box-shadow .2s ease-in-out;
 
     h1 {
-        color: #fff;
+        color: var(--link-color);
         font-size: 20px;
         font-weight: 100;
     }
@@ -301,16 +317,16 @@ body {
     margin-top: 20px;
     width: fit-content;
 
-    background-color: #FFFFFF50;
+    background-color: var(--searchbar-bg);
     backdrop-filter: blur(1px);
-    border: 1px #ffffff80 solid;
+    border: 1px var(--searchbar-text) solid;
     border-radius: 100vh;
 }
 
 #searchIcon {
     height: 20px;
     margin: 10px;
-    fill: #FFFFFF80;
+    fill: var(--searchbar-text);
 }
 
 #site-search {
@@ -319,7 +335,7 @@ body {
     font-family: "M Plus Code Latin";
     font-size: 15px;
     border: 0;
-    color: #fff;
+    color: var(--link-color);
     background-color: transparent;
 }
 
@@ -328,7 +344,7 @@ body {
 }
 
 #site-search::placeholder {
-    color: #FFFFFF90;
+    color: var(--searchbar-text);
 }
 
 #dropDownFilter {
@@ -361,9 +377,9 @@ body {
     width: 400px;
     gap: 5px;
 
-    background-color: #b08ce250;
+    background-color: var(--filter-modal-bg);
     backdrop-filter: blur(3px);
-    border: 1px #b798d5 solid;
+    border: 1px var(--filter-modal-border) solid;
     border-radius: 10px;
 
     transition: opacity .3s ease-out, transform .3s;
@@ -389,7 +405,7 @@ header {
 
     top: 0;
     z-index: 100;
-    background: linear-gradient(0.25turn, #846339 0%, #796040 13%, #B89F7E 84%, #DDB878 100%);
+    background: linear-gradient(0.25turn, var(--nav-pattern-1) 0%, var(--nav-pattern-2) 13%, var(--nav-pattern-3) 84%, var(--nav-pattern-4) 100%);
     border-bottom: 2px solid var(--header-border);
     height: auto;
 }
@@ -407,7 +423,6 @@ header {
     align-items: center;
     justify-content: space-evenly;
 }
-
 
 .bandeau a {
     text-decoration: none;
@@ -487,7 +502,7 @@ footer {
 
     text-align: center;
 
-    background-color: #312d46;
+    background-color: var(--main-pattern-3);
     color: #fff;
     border-top: 2px solid var(--header-border);
 }
@@ -499,5 +514,5 @@ footer {
     border: none;
     font-size: 25px;
     cursor: pointer;
-    color: white;
+    color: var(--link-color);
 }
